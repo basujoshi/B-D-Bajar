@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Social Media Sidebar</title> 
+  <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon styling */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border : 100
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Overlay for Sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style> 
+ </head> 
+ <body> <!-- Menu Icon --> 
+  <div class="menu-icon" onclick="toggleMenu()"> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+  </div> <!-- Overlay --> 
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div> <!-- Sidebar Menu --> 
+  <div id="sidebar" class="sidebar"> 
+   <h2 style="padding-left: 32px;">all information</h2> <a></a> 
+   <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="order save.html"> order management</a></li> 
+     <li><a></a><a href="return admin.html"> *️⃣ order return </a></li
+        <li><a></a><a href="  B.D.Bajar%20billing%20edit.html"> billing edit  </a></li 
+         <li><a></a><a href=" B.D.Bajar return bill edit"> return bill edit   </a></li 
+           <li><a></a><a href="  Billing2 all delete">     billing delete  </a></li 
+          <li><a></a><a href=" Return bill all delete"> return billing delete  </a></li                                                                
+       <li><a></a><a href="billingstock.html"> add billing sytem  system stock </a></li>                                                       
+     <li><a></a><a href="delivery-status.html"> 🧾 delivery complete</a></li>
+        
+     
+     
+    </ul> 
+   </nav>
+    </a> 
+  </div> 
+  <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script> 
+ </body>
+</html>
+
+
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>stock and order manegement</title> 
+  <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon styling */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border : 100
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Overlay for Sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style> 
+ </head> 
+ <body> <!-- Menu Icon --> 
+  <div class="menu-icon" onclick="toggleMenu()"> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+  </div> <!-- Overlay --> 
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div> <!-- Sidebar Menu --> 
+  <div id="sidebar" class="sidebar"> 
+   <h2 style="padding-left: 32px;">all information</h2> <a></a> 
+   <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="order save.html"> order management</a></li> 
+     <li><a></a><a href="B.D.Bajat returns item admin.html "> *️⃣ order return </a></li>
+     <li><a></a><a href="delivery-status.html"> 🧾 delivery complete status</a></li>
+     <li><a></a><a href="B.D.Bajar message admin"> 💬 all message admin</a></li>
+     
+     
+     
+    </ul> 
+   </nav>
+    </a> 
+  </div> 
+  <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script> 
+ </body>
+</html>
+
+
+       
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B.D.BAJAR - Stock management & Order management Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<style>
+  img.small { width:90px; height:90px; object-fit:cover; border-radius:8px; }
+</style>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+<div class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-4">
+
+  <div class="bg-white rounded shadow p-4">
+    <h1 class="text-2xl font-bold mb-3">📦 Stock management</h1>
+    <div id="stockManager" class="space-y-3"></div>
+
+    <div class="mt-4 border-t pt-4">
+      <h2 class="font-semibold mb-2">Manual Stock Update</h2>
+      <select id="productSelect" class="border p-2 rounded w-full mb-2"></select>
+      <input id="stockValue" type="number" class="border p-2 rounded w-full mb-2" placeholder="New stock value">
+      <button id="updateStockBtn" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Set Stock</button>
+    </div>
+  </div>
+
+  <div class="bg-white rounded shadow p-4">
+    <h1 class="text-2xl font-bold mb-3">🛒 Order Admin management</h1>
+    <input id="searchBox" class="border p-2 rounded w-full mb-3" placeholder="Search name / phone / order id / status / item">
+    <div id="ordersList" class="space-y-3 max-h-[78vh] overflow-auto"></div>
+  </div>
+
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "order-save-66986.firebaseapp.com",
+  databaseURL: "https://order-save-66986-default-rtdb.firebaseio.com",
+  projectId: "order-save-66986",
+  storageBucket: "order-save-66986.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+const productsList = [
+{ id: "BD001", name: "Men's Shirt BD001", price: 499, img: "https://i.ibb.co/zWvkj1Py/download.jpg" },
+{ id: "BD002", name: "Men's Jeans Pant BD002", price: 599, img: "https://i.ibb.co/Qj1XxTVT/images-2.jpg" },
+{ id: "BD003", name: "Men's Round Neck T-Shirt BD003", price: 299, img: "https://i.ibb.co/nqNFbwCL/images-3.jpg" },
+{ id: "BD004", name: "Men's Jacket BD004", price: 999, img: "https://i.ibb.co/x8HFXMW1/images-4.jpg" },
+{ id: "BD005", name: "Men's Half Shirt BD005", price: 399, img: "https://i.ibb.co/PzCM2kBK/images-5.jpg" },
+{ id: "BD006", name: "Men's Track Pant BD006", price: 499, img: "https://i.ibb.co/xq44RFBT/shopping.avif" },
+{ id: "BD007", name: "Men's Hoodie BD007", price: 449, img: "https://i.ibb.co/35WQ0T2H/images-6.jpg" },
+{ id: "BD008", name: "Men's Shorts BD008", price: 299, img: "https://i.ibb.co/RpyM95m4/images-7.jpg" },
+{ id: "BD009", name: "Men's Innerwear BD009", price: 149, img: "https://i.ibb.co/LdBXhTWj/images-9.jpg" },
+{ id: "BD010", name: "Men's Sleeveless T-Shirt BD010", price: 199, img: "https://i.ibb.co/hFsfRBnj/download.avif" },
+{ id: "BD011", name: "Men's Designer T-Shirt BD011", price: 299, img: "https://i.ibb.co/4gMQxwwg/download-1.avif" },
+
+{ id: "BD012", name: "Ladies Kurti Set BD012", price: 999, img: "https://i.ibb.co/qYFSZ2VC/download.webp" },
+{ id: "BD013", name: "Ladies Jeans Pant BD013", price: 599, img: "https://i.ibb.co/S4VG7NYd/images-2.jpg" },
+{ id: "BD014", name: "Ladies Top BD014", price: 399, img: "https://i.ibb.co/1tFc545s/images-3.jpg" },
+{ id: "BD015", name: "Ladies Pajama Set BD015", price: 699, img: "https://i.ibb.co/5XZHZBxG/images-8.jpg" },
+{ id: "BD016", name: "Ladies Leggings BD016", price: 249, img: "https://i.ibb.co/xqpWBvZT/download-1.webp" },
+{ id: "BD017", name: "Ladies Palazzo BD017", price: 399, img: "https://i.ibb.co/q3WM1jS8/images-4.jpg" },
+{ id: "BD018", name: "Ladies Track Pant BD018", price: 499, img: "https://i.ibb.co/Tq149BpY/images-7.jpg" },
+{ id: "BD019", name: "Ladies Jeggings BD019", price: 599, img: "https://i.ibb.co/Cpg0K4nG/images-5.jpg" },
+{ id: "BD020", name: "Ladies T-Shirt BD020", price: 299, img: "https://i.ibb.co/DHXjkgtS/images-6.jpg" },
+
+{ id: "BD021", name: "Boy Shirt BD021", price: 499, img: "https://i.ibb.co/vCMmrjGd/images-11.jpg" },
+{ id: "BD022", name: "Boy Round Neck T-Shirt BD022", price: 299, img: "https://i.ibb.co/5WPGdPJW/images-7.jpg" },
+{ id: "BD023", name: "Boy Jacket BD023", price: 799, img: "https://i.ibb.co/8LyzBcdL/images-8.jpg" },
+{ id: "BD024", name: "Boy Track Pant BD024", price: 349, img: "https://i.ibb.co/nsb6cFwM/images-9.jpg" },
+{ id: "BD025", name: "Boy Innerwear BD025", price: 99, img: "https://i.ibb.co/GQ7zJ4Vp/download.webp" },
+
+{ id: "BD026", name: "Girl Top BD026", price: 899, img: "https://i.ibb.co/Q3tsYQ9y/shopping.webp" },
+{ id: "BD027", name: "Girls Frock BD027", price: 399, img: "https://i.ibb.co/S7MmhnTL/shopping-1.webp" },
+{ id: "BD028", name: "Girls Hoodie BD028", price: 499, img: "https://i.ibb.co/yFXvFbHM/shopping.avif" },
+{ id: "BD029", name: "Girls Set BD029", price: 599, img: "https://i.ibb.co/v6XZMw5s/download.webp" },
+
+{ id: "BD030", name: "Samsung 1.5 Ton Split AC BD030", price: 34999, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+{ id: "BD031", name: "LG 2 Ton Window AC BD031", price: 39999, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+{ id: "BD032", name: "Whirlpool 1 Ton Inverter AC BD032", price: 29999, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+{ id: "BD033", name: "Haier 1.5 Ton AC BD033", price: 32499, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+{ id: "BD034", name: "Godrej 1 Ton AC BD034", price: 27499, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+{ id: "BD035", name: "Voltas 1.5 Ton 5 Star Split AC BD035", price: 36999, img: "https://i.ibb.co/sZHvTZ1/download.jpg" },
+
+{ id: "BD036", name: "iPhone 13 BD036", price: 74999, img: "https://i.ibb.co/yBxG8R56/download-1.webp" },
+{ id: "BD037", name: "Samsung Galaxy S21 BD037", price: 59999, img: "https://i.ibb.co/jkJnQRRP/download-2.webp" },
+{ id: "BD038", name: "OnePlus 9 BD038", price: 49999, img: "https://i.ibb.co/7ttYG5gN/download-3.webp" },
+{ id: "BD039", name: "Xiaomi Mi 11 BD039", price: 44999, img: "https://i.ibb.co/Q3C0gNHw/download-4.webp" },
+{ id: "BD040", name: "Realme GT BD040", price: 39999, img: "https://i.ibb.co/7xZ66BKF/download-5.webp" },
+{ id: "BD041", name: "Vivo V21e BD041", price: 26999, img: "https://i.ibb.co/wF5tBPN5/download-6.webp" },
+
+{ id: "BD042", name: "Dell Inspiron 15 BD042", price: 49999, img: "https://i.ibb.co/RGq1b7mR/download-1.webp" },
+{ id: "BD043", name: "HP Pavilion x360 BD043", price: 65999, img: "https://i.ibb.co/Y4PTGxcr/shopping.webp" },
+{ id: "BD044", name: "MacBook Air BD044", price: 92999, img: "https://i.ibb.co/XkF4yQYh/download-2.webp" },
+{ id: "BD045", name: "Lenovo ThinkPad BD045", price: 55999, img: "https://i.ibb.co/wNDFpPn2/61vqw4b-MKTL-AC-UF1000-1000-QL80-FMwebp.webp" },
+{ id: "BD046", name: "Acer Aspire 7 BD046", price: 45999, img: "https://i.ibb.co/GfNgPhnS/download-3.webp" },
+{ id: "BD047", name: "Asus VivoBook BD047", price: 40999, img: "https://i.ibb.co/GfNgPhnS/download-3.webp" },
+
+{ id: "BD048", name: "Samsung 55 Inch 4K TV BD048", price: 55999, img: "https://i.ibb.co/V0LbmG9V/download-1.webp" },
+{ id: "BD049", name: "LG 50 Inch UHD TV BD049", price: 45999, img: "https://i.ibb.co/Rk7MfhvT/download-2.webp" },
+{ id: "BD050", name: "Sony Bravia 65 Inch TV BD050", price: 72999, img: "https://i.ibb.co/Kjk6KvXs/download-3.webp" },
+{ id: "BD051", name: "TCL 43 Inch LED TV BD051", price: 29999, img: "https://i.ibb.co/s9LS1Tq6/download-4.webp" },
+{ id: "BD052", name: "Vizio 75 Inch Smart TV BD052", price: 99999, img: "https://i.ibb.co/VcMhsbN0/download-5.webp" },
+{ id: "BD053", name: "Mi LED TV 32 Inch BD053", price: 15999, img: "https://i.ibb.co/ksXQvzkW/download-6.webp" }   
+];
+
+const prodSelect = document.getElementById("productSelect");
+productsList.forEach(p => {
+  const opt = document.createElement("option");
+  opt.value = p.id;
+  opt.textContent = `${p.id} - ${p.name}`;
+  prodSelect.appendChild(opt);
+});
+
+function renderStocks() {
+  const box = document.getElementById("stockManager");
+  box.innerHTML = "";
+  productsList.forEach(p => {
+    const row = document.createElement("div");
+    row.className = "border rounded p-3";
+    row.innerHTML = `
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <div class="flex items-center gap-3">
+          <img src="${p.img}" class="small" alt="${p.name}">
+          <div>
+            <div class="font-semibold">${p.name}</div>
+            <div id="stockShow-${p.id}" class="text-sm text-gray-600">Loading stock...</div>
+          </div>
+        </div>
+        <div class="flex gap-1 flex-wrap">
+          <button class="bg-green-600 text-white px-3 py-1 rounded" onclick="changeStock('${p.id}',1)">+1</button>
+          <button class="bg-green-700 text-white px-3 py-1 rounded" onclick="changeStock('${p.id}',100)">+100</button>
+          <button class="bg-red-500 text-white px-3 py-1 rounded" onclick="changeStock('${p.id}',-1)">-1</button>
+          <button class="bg-red-700 text-white px-3 py-1 rounded" onclick="changeStock('${p.id}',-100)">-100</button>
+        </div>
+      </div>
+    `;
+    box.appendChild(row);
+
+    db.ref("stock/" + p.id).on("value", snap => {
+      const el = document.getElementById("stockShow-" + p.id);
+      if (el) el.innerText = "Stock: " + (snap.val() || 0);
+    });
+  });
+}
+
+function changeStock(pid, delta) {
+  db.ref("stock/" + pid).transaction(current => Math.max(0, (current || 0) + delta));
+}
+
+document.getElementById("updateStockBtn").addEventListener("click", () => {
+  db.ref("stock/" + prodSelect.value).set(parseInt(document.getElementById("stockValue").value || "0", 10));
+  document.getElementById("stockValue").value = "";
+});
+
+const ordersList = document.getElementById("ordersList");
+let allOrders = {};
+
+db.ref("orders").on("value", snap => {
+  allOrders = snap.val() || {};
+  loadOrders();
+});
+
+async function restoreStock(order) {
+  for (const it of (order.items || [])) {
+    await db.ref("stock/" + it.id).transaction(current => (current || 0) + (parseInt(it.qty, 10) || 0));
+  }
+}
+
+function loadOrders() {
+  const q = document.getElementById("searchBox").value.toLowerCase().trim();
+  ordersList.innerHTML = "";
+
+  Object.entries(allOrders).reverse().forEach(([id, d]) => {
+    const text = `${id} ${(d.customer?.name || "")} ${(d.customer?.phone || "")} ${(d.orderStatus || "")} ${(d.paymentStatus || "")} ${(d.items || []).map(x => x.name).join(" ")}`.toLowerCase();
+    if (q && !text.includes(q)) return;
+
+    const itemsHtml = (d.items || []).map(it => `
+      <div class="border rounded p-2 mb-2 flex gap-3 items-center">
+        <img src="${it.img || ''}" class="small" alt="">
+        <div>
+          <div><b>${it.name || ""}</b></div>
+          <div>Qty: ${it.qty || 0}</div>
+          <div>Price: Rs. ${it.price || 0}</div>
+        </div>
+      </div>
+    `).join("");
+
+    const div = document.createElement("div");
+    div.className = "border rounded p-3 bg-gray-50";
+    div.innerHTML = `
+      <div class="flex justify-between gap-2 flex-wrap">
+        <div>
+          <div class="font-bold">${d.customer?.name || ""}</div>
+          <div class="text-sm text-gray-600">Order ID: ${id}</div>
+          <div class="text-sm text-gray-600">Phone: ${d.customer?.phone || ""}</div>
+          <div class="text-sm text-gray-600">Payment: ${d.paymentStatus || "Pending"}</div>
+          <div class="text-sm text-gray-600">Order Status: ${d.orderStatus || "Pending"}</div>
+          <div class="text-sm text-gray-600">Delivery: ${d.deliveryStatus || ""}</div>
+          <div class="text-sm text-gray-600">Total: Rs. ${d.totalAmount || 0}</div>
+        </div>
+        <div class="space-y-1 text-right">
+          <button onclick="showDetail('${id}')" class="bg-gray-700 text-white px-3 py-1 rounded w-full">View</button>
+          <button onclick="setStatus('${id}','Confirmed')" class="bg-blue-600 text-white px-3 py-1 rounded w-full">Confirm</button>
+          <button onclick="setStatus('${id}','Shipping')" class="bg-indigo-600 text-white px-3 py-1 rounded w-full">Shipping</button>
+          <button onclick="setStatus('${id}','Out for Delivery')" class="bg-yellow-500 text-white px-3 py-1 rounded w-full">Out for Delivery</button>
+          <button onclick="setStatus('${id}','Delivered')" class="bg-green-600 text-white px-3 py-1 rounded w-full">Delivered</button>
+          <button onclick="markPaid('${id}')" class="bg-emerald-600 text-white px-3 py-1 rounded w-full">Paid</button>
+          <button onclick="markPending('${id}')" class="bg-orange-500 text-white px-3 py-1 rounded w-full">Pending</button>
+          <button onclick="cancelAll('${id}')" class="bg-red-600 text-white px-3 py-1 rounded w-full">Cancel/Delete</button>
+        </div>
+      </div>
+      <div class="mt-3">${itemsHtml}</div>
+    `;
+    ordersList.appendChild(div);
+  });
+}
+
+function showDetail(id) { alert(JSON.stringify(allOrders[id], null, 2)); }
+
+function setStatus(id, status) {
+  db.ref("orders/" + id).update({ orderStatus: status, deliveryStatus: status, tracking: { current: status } });
+}
+function markPaid(id) { db.ref("orders/" + id).update({ paymentStatus: "Paid" }); }
+function markPending(id) { db.ref("orders/" + id).update({ paymentStatus: "Pending" }); }
+
+async function cancelAll(id) {
+  if (!confirm("Delete order and restore stock?")) return;
+  const snap = await db.ref("orders/" + id).once("value");
+  const order = snap.val();
+  if (order) await restoreStock(order);
+  await db.ref("orders/" + id).remove();
+  await db.ref("deliveryLogs/" + id).remove();
+  await db.ref("returns/" + id).remove();
+  await db.ref("cancelLogs/" + id).set({ orderId: id, deletedAt: new Date().toISOString() });
+  loadOrders();
+}
+
+document.getElementById("searchBox").addEventListener("input", loadOrders);
+renderStocks();
+</script>
+</body>
+</html>
