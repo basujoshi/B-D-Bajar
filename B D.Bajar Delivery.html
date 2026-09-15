@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.D.BAJAR Delivery Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+  <div class="bg-white rounded shadow p-4">
+    <h2 class="text-2xl font-bold mb-3">🚚 Delivery System</h2>
+    <input id="searchInput" class="border p-2 rounded w-full mb-2" placeholder="Search Name / Phone / Order ID">
+    <button onclick="searchOrder()" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Search Order</button>
+    <div id="resultList" class="mt-4 space-y-2"></div>
+  </div>
+
+  <div class="bg-white rounded shadow p-4">
+    <h2 class="text-2xl font-bold mb-3">Delivery Details</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <input name="Customer_Name" readonly class="border p-2 rounded" placeholder="Customer Name">
+      <input name="Customer_Phone" readonly class="border p-2 rounded" placeholder="Phone">
+      <textarea name="Address" readonly class="border p-2 rounded md:col-span-2" placeholder="Address"></textarea>
+
+      <input name="Order_ID" readonly class="border p-2 rounded" placeholder="Order ID">
+      <input name="Payment_Method" readonly class="border p-2 rounded" placeholder="Payment Method">
+
+      <input name="Product_Name" readonly class="border p-2 rounded" placeholder="Product">
+      <input name="Quantity" readonly class="border p-2 rounded" placeholder="Qty">
+      <input name="Price" readonly class="border p-2 rounded" placeholder="Price">
+      <input id="total" readonly class="border p-2 rounded" placeholder="Total">
+      <input name="Subtotal" readonly class="border p-2 rounded" placeholder="Subtotal">
+      <input name="Delivery_Charge" readonly class="border p-2 rounded" placeholder="Delivery Charge">
+    </div>
+
+    <div id="productImg" class="mt-3"></div>
+
+    <div class="mt-3 grid grid-cols-1 gap-2">
+      <select id="payment" class="border p-2 rounded">
+        <option value="Cash">Cash</option>
+        <option value="UPI">UPI</option>
+        <option value="Nepal Mobile Banking">Nepal Mobile Banking</option>
+      </select>
+
+      <input id="upiId" placeholder="Enter UPI ID" class="border p-2 rounded hidden">
+      
+      <select id="status" class="border p-2 rounded">
+        <option value="Assigned">Assigned</option>
+        <option value="Out for Delivery">Out for Delivery</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Failed">Failed</option>
+      </select>
+
+      <textarea id="remarks" class="border p-2 rounded" rows="3" placeholder="Remarks / driver note"></textarea>
+
+      <button onclick="confirmDelivery()" class="bg-green-600 text-white px-4 py-2 rounded">✅ Save Delivery</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "order-save-66986.firebaseapp.com",
+  databaseURL: "https://order-save-66986-default-rtdb.firebaseio.com",
+  projectId: "order-save-66986",
+  storageBucket: "order-save-66986.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+let currentOrderId = "";
+
+function mapsLink(address) {
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address || "");
+}
+
+function searchOrder(){
+  const input = document.getElementById("searchInput").value.toLowerCase().trim();
+  const resultBox = document.getElementById("resultList");
+  resultBox.innerHTML = "<div class='text-gray-500'>Searching...</div>";
+
+  db.ref("orders").once("value").then(snapshot => {
+    let html = "";
+    snapshot.forEach(child => {
+      const d = child.val() || {};
+      const id = child.key;
+      const name = (d.customer?.name || "").toLowerCase();
+      const phone = (d.customer?.phone || "").toLowerCase();
+      const orderId = id.toLowerCase();
+      const product = (d.items?.map(x => x.name).join(" ") || "").toLowerCase();
+      const status = (d.orderStatus || d.paymentStatus || d.deliveryStatus || "").toLowerCase();
+
+      if (name.includes(input) || phone.includes(input) || orderId.includes(input) || product.includes(input) || status.includes(input)) {
+        html += `
+          <div class="border rounded p-3 bg-gray-50">
+            <div><b>${d.customer?.name || ""}</b> (${d.customer?.phone || ""})</div>
+            <div class="text-sm text-gray-600">Order: ${id}</div>
+            <div class="text-sm text-gray-600">Status: ${d.orderStatus || d.deliveryStatus || ""}</div>
+            <div class="mt-2 flex gap-2">
+              <button class="bg-blue-600 text-white px-3 py-1 rounded" onclick="selectOrder('${id}')">Select</button>
+              <a class="bg-gray-800 text-white px-3 py-1 rounded" target="_blank" href="${mapsLink(d.customer?.address || '')}">Map</a>
+            </div>
+          </div>`;
+      }
+    });
+    resultBox.innerHTML = html || "<div class='text-red-600'>❌ No order found</div>";
+  });
+}
+
+function selectOrder(id){
+  currentOrderId = id;
+  db.ref("orders/" + id).once("value").then(snap => {
+    const d = snap.val() || {};
+    const items = d.items || [];
+    const item = items[0] || {};
+
+    document.querySelector("[name='Customer_Name']").value = d.customer?.name || "";
+    document.querySelector("[name='Customer_Phone']").value = d.customer?.phone || "";
+    document.querySelector("[name='Address']").value = d.customer?.address || "";
+    document.querySelector("[name='Order_ID']").value = id;
+    document.querySelector("[name='Payment_Method']").value = d.paymentMethod || "";
+    document.querySelector("[name='Product_Name']").value = items.map(x => x.name).join(", ") || "";
+    document.querySelector("[name='Quantity']").value = items.map(x => x.qty).join(", ") || "";
+    document.querySelector("[name='Price']").value = items.map(x => x.price).join(", ") || "";
+    document.querySelector("[name='Subtotal']").value = d.subtotal || 0;
+    document.querySelector("[name='Delivery_Charge']").value = d.deliveryCharge || 0;
+    document.getElementById("total").value = d.totalAmount || 0;
+    document.getElementById("productImg").innerHTML = item.img ? `<img src="${item.img}" class="w-28 h-28 object-cover rounded border">` : "";
+
+    if ((d.paymentMethod || "").toLowerCase() === "upi") {
+      document.getElementById("payment").value = "UPI";
+      document.getElementById("upiId").classList.remove("hidden");
+    } else if ((d.paymentMethod || "").toLowerCase().includes("nepal")) {
+      document.getElementById("payment").value = "Nepal Mobile Banking";
+      document.getElementById("upiId").classList.add("hidden");
+    } else {
+      document.getElementById("payment").value = "Cash";
+      document.getElementById("upiId").classList.add("hidden");
+    }
+  });
+}
+
+document.getElementById("payment").addEventListener("change", function(){
+  document.getElementById("upiId").classList.toggle("hidden", this.value !== "UPI");
+});
+
+function confirmDelivery(){
+  if(!currentOrderId) return alert("Select order first");
+
+  const deliveryData = {
+    orderId: currentOrderId,
+    name: document.querySelector("[name='Customer_Name']").value,
+    phone: document.querySelector("[name='Customer_Phone']").value,
+    address: document.querySelector("[name='Address']").value,
+    product: document.querySelector("[name='Product_Name']").value,
+    quantity: document.querySelector("[name='Quantity']").value,
+    price: document.querySelector("[name='Price']").value,
+    subtotal: document.querySelector("[name='Subtotal']").value,
+    deliveryCharge: document.querySelector("[name='Delivery_Charge']").value,
+    total: document.getElementById("total").value,
+    payment: document.getElementById("payment").value,
+    status: document.getElementById("status").value,
+    remarks: document.getElementById("remarks").value,
+    time: new Date().toLocaleString()
+  };
+
+  db.ref("deliveryLogs/" + currentOrderId).set(deliveryData);
+  db.ref("orders/" + currentOrderId).update({
+    deliveryStatus: deliveryData.status,
+    orderStatus: deliveryData.status,
+    deliveryUpdatedAt: deliveryData.time,
+    deliveryNote: deliveryData.remarks,
+    paymentMethod: deliveryData.payment
+  });
+
+  const waMsg = `Hello ${deliveryData.name}, your order is ${deliveryData.status}. Order ID: ${deliveryData.orderId}. Product: ${deliveryData.product}. Total: ₹${deliveryData.total}.`;
+  window.open(`https://wa.me/${deliveryData.phone}?text=${encodeURIComponent(waMsg)}`, "_blank");
+
+  alert("✅ Delivery saved in admin + order updated.");
+}
+</script>
+
+</body>
+</html>
