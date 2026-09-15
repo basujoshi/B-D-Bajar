@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Social Media Sidebar</title> 
+  <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon styling */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border : 100
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Overlay for Sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style> 
+ </head> 
+ <body> <!-- Menu Icon --> 
+  <div class="menu-icon" onclick="toggleMenu()"> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+  </div> <!-- Overlay --> 
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div> <!-- Sidebar Menu --> 
+  <div id="sidebar" class="sidebar"> 
+   <h2 style="padding-left: 32px;">all information</h2> <a></a> 
+   <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="order save.html"> order management</a></li> 
+     <li><a></a><a href="return admin.html"> *️⃣ order return </a></li>
+     <li><a></a><a href="delivery-status.html"> 🧾 delivery complete status</a></li>
+     
+    </ul> 
+   </nav>
+    </a> 
+  </div> 
+  <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script> 
+ </body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.D.BAJAR - Admin Panel</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  h2 { text-align: center; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+  th { background: #007bff; color: white; }
+  button { padding: 5px 10px; cursor: pointer; margin-right: 5px; }
+  .success { background: #28a745; color: white; border: none; }
+  .cancel { background: #dc3545; color: white; border: none; }
+  .exchange { background: #ffc107; color: black; border: none; }
+</style>
+</head>
+<body>
+
+<h2>📦 B.D.BAJAR Admin Panel</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Customer</th>
+      <th>Reason</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="returnList"></tbody>
+</table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { getDatabase, ref, onChildAdded, update } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+const firebaseConfig = { databaseURL: "https://king-59c08-default-rtdb.firebaseio.com" };
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const returnsRef = ref(db, "returns");
+
+const list = document.getElementById("returnList");
+
+onChildAdded(returnsRef, (data) => {
+  const req = data.val();
+  const key = data.key;
+
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${req.orderId}</td>
+    <td>${req.name} <br> ${req.phone}</td>
+    <td>${req.reason}</td>
+    <td>${req.type || 'Return'}</td>
+    <td id="status_${key}">${req.status}</td>
+    <td>
+      <button class="success" onclick="markStatus('${key}','Return Successfully ✅')">Return ✅</button>
+      <button class="exchange" onclick="markStatus('${key}','Exchange Requested ⚡')">Exchange ⚡</button>
+      <button class="cancel" onclick="markStatus('${key}','Cancelled ❌')">Cancel ❌</button>
+    </td>
+  `;
+  list.appendChild(row);
+});
+
+window.markStatus = function(key, newStatus) {
+  update(ref(db, "returns/" + key), { status: newStatus });
+  document.getElementById("status_" + key).innerText = newStatus;
+  alert("Status updated: " + newStatus);
+};
+</script>
+</body>
+</html>
