@@ -1,0 +1,977 @@
+  
+<!-- Profile Icon (Top Right) -->
+<div style="position: fixed; top: 8px; right: 15px; z-index: 120;">
+  <a href="Costume profile.html.html" target="_self"> <!-- target="_blank" likho agar naye tab me kholna hai -->
+    <img src="https://i.ibb.co/DDGJJWpJ/images-7.jpg" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; cursor: pointer; border: 2px solid white;">
+  </a>
+</div>
+
+<!-- Include Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Fixed bottom navigation -->
+<div style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000; background-color: #1c1c1c; display: flex; justify-content: space-around; padding: 0.1px 0;">
+  <a href="My Shop.html" style="color: #1877f2; font-size: 30px;">
+    <i class="fas fa-home"></i>
+  </a>
+
+  <a href="Job-from.html" style="color: white; font-size: 30px;">
+    <i class="fas fa-file-alt"></i>
+  </a>
+
+  <a href="track_order.html" style="color: white; font-size: 30px;">
+    <i class="fas fa-map-marker-alt"></i>
+  </a>
+
+  <a href="https://www.facebook.com/profile.php?id=61565625534540" target="_blank" style="color: #1877f2; font-size: 30px;">
+    <i class="fab fa-facebook"></i>
+  </a>
+
+  <a href="Shop contact.html" style="color: white; font-size: 30px;">
+    <i class="fas fa-phone"></i>
+  </a>
+
+  <a href="My Shop about.html" style="color: white; font-size: 30px;">
+    <i class="fas fa-info-circle"></i>
+  </a>
+</div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Page Open</title>
+  <style>
+    #success-message {
+      display: none;
+      background-color: #d4edda;
+      color: #155724;
+      padding: 20px;
+      margin: 20px;
+      border: 2px solid #c3e6cb;
+      border-radius: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s forwards;
+    }
+
+    .fade-out {
+      animation: fadeOut 0.5s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="success-message">Page Successfully Opened!</div>
+
+<script>
+  window.onload = function() {
+    const msg = document.getElementById("success-message");
+    msg.style.display = "block";
+    msg.classList.add("fade-in");
+
+    setTimeout(() => {
+      msg.classList.remove("fade-in");
+      msg.classList.add("fade-out");
+
+      // Hide after animation
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 500);
+    }, 2000); // 2 seconds
+  }
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Chat</title>
+  <style>
+    #chatWidget {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      display: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    #chatHeader {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #chat {
+      height: 250px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    #typing { font-style: italic; color: gray; margin: 0 10px; }
+    .message { margin-bottom: 10px; }
+    .message img { width: 30px; height: 30px; border-radius: 50%; vertical-align: middle; }
+    .message span { margin-left: 5px; }
+    .controls button { margin-left: 5px; }
+
+    #messageInput {
+      display: flex;
+      padding: 10px;
+      gap: 5px;
+    }
+
+    #messageInput input {
+      flex: 1;
+      padding: 5px;
+    }
+
+    #chatIcon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #007bff;
+      color: white;
+      border-radius: 50px;
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    #chatIcon img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chatWidget">
+  <div id="chatHeader">
+    <span>B.D.Bahar direct live chatting</span>
+    <button onclick="toggleChat()">X</button>
+  </div>
+  <div id="chat"></div>
+  <div id="typing"></div>
+  <div id="messageInput">
+    <input type="text" id="message" placeholder="Type a message" oninput="sendTyping()" />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<div id="chatIcon" onclick="toggleChat()">
+  <img src="https://i.ibb.co/bM7Sf7WZ/file-00000000165461f6a353a803df04ce0a-conversation-id-67ff6f15-afdc-800e-973e-8e00dd4617c0-message-i.png" />
+  <span>B.D.Bajar</span>
+</div>
+
+<audio id="notifySound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getDatabase, ref, push, onChildAdded, set, update, onValue } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTLEe5MPgJn6Uo17KMb4Gz1Xp9GdxGQzo",
+    authDomain: "shop-chatting-3e73a.firebaseapp.com",
+    databaseURL: "https://shop-chatting-3e73a-default-rtdb.firebaseio.com",
+    projectId: "shop-chatting-3e73a",
+    storageBucket: "shop-chatting-3e73a.appspot.com",
+    messagingSenderId: "789543477560",
+    appId: "1:789543477560:web:f829f67890821b209021cd"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const chatRef = ref(db, "chat");
+  const typingRef = ref(db, "typing");
+
+  let user = "Customer";
+  let name = "costumer";
+  const photoURL = "https://i.ibb.co/gbcN25dQ/images.png";
+
+  const notificationAudio = document.getElementById("notifySound");
+
+  function askUserName() {
+    const storedName = localStorage.getItem("chatUserName");
+    if (storedName) {
+      name = storedName;
+      user = storedName;
+    } else {
+      const userName = prompt("Enter your name:");
+      if (userName && userName.trim() !== "") {
+        name = userName.trim();
+        user = userName.trim();
+        localStorage.setItem("chatUserName", userName.trim());
+      }
+    }
+  }
+
+  function sendMessage() {
+    const msg = document.getElementById("message").value;
+    if (msg.trim() !== "") {
+      const time = new Date().toLocaleTimeString();
+      const timestamp = Date.now();
+      push(chatRef, { user, name, photoURL, text: msg, time, timestamp });
+      document.getElementById("message").value = "";
+      set(typingRef, { user, typing: false });
+    }
+  }
+
+  function sendTyping() {
+    set(typingRef, { user, typing: true });
+  }
+
+  onChildAdded(chatRef, (data) => {
+    const msg = data.val();
+    const key = data.key;
+    const now = Date.now();
+    const messageAge = now - msg.timestamp;
+
+    const div = document.createElement("div");
+    div.className = "message";
+    div.id = "msg_" + key;
+    div.innerHTML = `
+      <img src="${msg.photoURL}" />
+      <span><b>${msg.name}:</b> <span id="text_${key}">${msg.text}</span> <small>(${msg.time})</small></span>
+      <span class="controls" id="controls_${key}"></span>
+    `;
+    document.getElementById("chat").appendChild(div);
+
+    if (msg.user === user && messageAge <= 30000) {
+      const controlSpan = document.getElementById("controls_" + key);
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.onclick = () => editMessage(key, msg.text);
+      controlSpan.appendChild(editBtn);
+
+      setTimeout(() => {
+        const ctrl = document.getElementById("controls_" + key);
+        if (ctrl) ctrl.innerHTML = "";
+      }, 30000 - messageAge);
+    }
+
+    if (msg.user !== user) {
+      notificationAudio.play();
+    }
+  });
+
+  function editMessage(key, oldText) {
+    const newText = prompt("Edit your message:", oldText);
+    if (newText !== null) {
+      update(ref(db, `chat/${key}`), { text: newText });
+    }
+  }
+
+  onValue(typingRef, (snapshot) => {
+    const data = snapshot.val();
+    document.getElementById("typing").innerText =
+      data?.user !== user && data?.typing ? `${data.user} is typing...` : "";
+  });
+
+  window.sendMessage = sendMessage;
+  window.sendTyping = sendTyping;
+  window.editMessage = editMessage;
+  window.toggleChat = function () {
+    const widget = document.getElementById("chatWidget");
+    if (widget.style.display === "none") {
+      askUserName();
+      widget.style.display = "block";
+    } else {
+      widget.style.display = "none";
+    }
+  };
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 80%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 80%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border: 1px solid white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <h2 style="padding-left: 20px;"> B.D.Joshi online shopping </h2>
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+         <li><a href="my shop.html"> back to B.D.Bajar </a></li>
+          <li><a href="Job-from.html">  🏢  new Job opning ( B.D.Bajar )</a></li> 
+            <li><a href="Shop contact.html"> ☎️  costumer Care ( B.D.Bajar )
+            <li><a href="tracking.html">  🛜  B.D.bajar track your oder ( B.D.Bajar )</a></li>
+            <li><a href="returns.html">  🫡  item returns & exchange ( B.D.Bajar )</a></li>
+            <li><a href="Location Shop.html">  🚩🗾  order time location send (B.D.Bajar )</a></li>
+           <li><a href=" Shop-share.html">  💹  B.D.Bajar today share market ( B.D.Bajar ) </a></li>
+            <li><a href="My Shop about.html" >  🗣️  B.D Bajar shop about ( B.D.Bajar ) </a></li>
+            <li><a href="feedback.html">  🛗  Feedback ( B.D.Bajar ) </a></li>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "250px";
+            overlay.style.display = "block";
+        }
+    }
+
+    function closeMenu() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #greeting {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="greeting">Loading...</div>
+
+  <script>
+    const greetingElement = document.getElementById("greeting");
+    const now = new Date();
+    const hour = now.getHours();
+
+    let greeting = "";
+
+    if (hour >= 5 && hour < 12) {
+      greeting = "Good morning🌄";
+    } else if (hour >= 12 && hour < 17) {
+      greeting = "Good Afternoon🍛";
+    } else if (hour >= 17 && hour < 20) {
+      greeting = "Good Evening🚶";
+    } else {
+      greeting = "Good Night🛌";
+    }
+
+    greetingElement.innerText = greeting;
+  </script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Photo Auto-Changing Slideshow</title>
+    <style>
+        /* Slideshow Container Styling */
+        .slideshow-container {
+            max-width: 20 px;
+            position: relative;
+            margin: 10;
+        }
+
+        /* Slide Images Styling */
+        .slide {
+            display: none;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        /* Fade Animation */
+        .fade {
+            animation: fadeEffect 1s;
+        }
+
+        /* Keyframes for Fade Effect */
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+       <!-- Slides (11 images) -->
+       <img src="https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp" class="slide fade " alt="Image">
+        <img src="https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp " class="slide fade" alt="Image 1">
+        <img src="https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp" class="slide fade" alt="Image 2">
+        <img src="https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg " class="slide fade" alt="Image 3">
+        <img src="https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp" class="slide fade" alt="Image 4">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 5">
+        <img src="https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp " class="slide fade" alt="Image 6">
+        <img src="https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp" class="slide fade" alt="Image 7">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 8">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 9">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 10">
+    </div>
+
+    <!-- JavaScript for Auto-Changing Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+
+            // Show current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Change image every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Initialize slideshow
+        showSlides();
+    </script>
+
+</body>
+</html>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Mini Chat</title>
+    <style>
+        #whatsapp-btn, #chat-box {
+            position: fixed;
+            left: 20px; /* Changed from right to left */
+        }
+        #whatsapp-btn {
+            bottom: 20px;
+            background: #25d366;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+        }
+        #whatsapp-btn img { width: 30px; margin-top: 10px; }
+        #chat-box {
+            bottom: 80px;
+            width: 280px;
+            background: #fff;
+            border: 1px solid #ddd;
+            display: none;
+            padding: 10px;
+        }
+        #chat-header { background: #25d366; color: #fff; padding: 5px; }
+        #chat-footer { display: flex; }
+        input { flex: 1; padding: 5px; }
+        button { background: #25d366; color: #fff; border: none; padding: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="whatsapp-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </div>
+
+    <div id="chat-box">
+        <div id="chat-header">B.D.Bajar customer care Chat <span id="close-btn" style="float:right;cursor:pointer;">X</span></div>
+        <div id="chat-messages">Namaste! Welcome to B.D.Bajar customer care. Thanks for visiting, sir/madam!</div>
+        <div id="chat-footer">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("whatsapp-btn").onclick = function() {
+            document.getElementById("chat-box").style.display = "block";
+        };
+        document.getElementById("close-btn").onclick = function() {
+            document.getElementById("chat-box").style.display = "none";
+        };
+        document.getElementById("send-btn").onclick = function() {
+            var message = document.getElementById("user-input").value;
+            if (message.trim() !== "") {
+                window.open("https://wa.me/+918925388970?text=" + encodeURIComponent(message), "_blank");
+            }
+        };
+    </script>
+
+</body>
+</html>             
+
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.D.BAJAR Job Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 70%;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>B.D.BAJAR Job Application Form</h2>
+        <form action="mailto:joshibasu12345@gmail.com" method="post" enctype="text/plain">
+            <!-- Personal Information -->
+            <label>1. Full Name:</label>
+            <input type="text" name="fullname" required><label>2. Date of Birth:</label>
+        <input type="date" name="dob" required>
+        
+        <label>3. Gender:</label>
+        <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        
+        <label>4. Phone(whatsapp)Number:</label>
+        <input type="tel" name="phone" required>
+        
+        <label>5. Email Address:</label>
+        <input type="email" name="email" required>
+        
+        <label>6. Current Address:</label>
+        <input type="text" name="address" required>
+        
+        <!-- Position Applied For -->
+        <label>7. Job Title:</label>
+        <input type="text" name="jobtitle" required>
+        
+        <label>8. Preferred Department:</label>
+        <input type="text" name="department" required>
+        
+        <label>9. Expected Salary:</label>
+        <input type="text" name="salary">
+        
+        <label>10. Availability:</label>
+        <select name="availability">
+            <option value="Full-Time">Full-Time</option>
+            <option value="Part-Time">Part-Time</option>
+            <option value="Internship">Internship</option>
+        </select>
+        
+        <!-- Education & Qualifications -->
+        <label>11. Highest Qualification:</label>
+        <input type="text" name="qualification" required>
+        
+        <label>12. University/College Name:</label>
+        <input type="text" name="college" required>
+        
+        <label>13. Year of Passing:</label>
+        <input type="text" name="passingyear" required>
+        
+        <label>14. Other Certifications (if any):</label>
+        <input type="text" name="certifications">
+        
+        <!-- Work Experience -->
+        <label>15. Previous Employer (if any):</label>
+        <input type="text" name="employer">
+        
+        <label>16. Job Title:</label>
+        <input type="text" name="jobtitle_exp">
+        
+        <label>17. Duration (From - To):</label>
+        <input type="text" name="duration">
+        
+        <label>18. Key Responsibilities:</label>
+        <textarea name="responsibilities"></textarea>
+        
+        <!-- Skills & Competencies -->
+        <label>19. Skills & Competencies:</label>
+        <input type="checkbox" name="skills" value="manager"> manager 
+        <input type="checkbox" name="skills" value="assistant manager"> assistant manager 
+        <input type="checkbox" name="skills" value="sales manager"> sales manager 
+        <input type="checkbox" name="skills" value="sales & man"> sales man
+        <input type="checkbox" name="skills" value="Delivery boy/girls"> Delivery boy/girls 
+        <input type="text" name="otherskills" placeholder="Other Skills">
+        
+        <!-- References -->
+        <label>20. Reference Name:</label>
+        <input type="text" name="ref_name">
+        
+        <label>21. Relation:</label>
+        <input type="text" name="ref_relation">
+        
+        <label>22. Contact(whatsapp)number:</label>
+        <input type="text" name="ref_contact">
+        
+        <!-- Declaration -->
+        <label>23. Declaration:</label>
+        <p> hello I am B.D.Bajar हजुर लाई हाम्रो परिवारमा स्वागत छ तिमीले इमान्दार पूर्व आफ्नो कर्तव्य र B.D.Bajar ka नियम पालना गर्नु पर्ने छ thanks ☺️☺️.</p>
+        
+        <label>24. Signature:</label>
+        <input type="text" name="signature" required>
+        
+        <label>25. Date:</label>
+        <input type="date" name="date" required>
+        
+        <button type="submit" class="btn">Submit Application</button>
+    </form>
+</div>
+
+</body>
+</html>
+
+
+<ul style="list-style-type: none; padding: 0;">
+            <li><a href="Real chat.html">    💬B.D.Bajar chat</a></li>
+
+    <!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+  .footer {
+    background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+    color: #fff;
+    padding: 60px 20px 30px;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+  }
+
+  .footer-container {
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+  }
+
+  .footer h3 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+  }
+
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .footer a {
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    flex: 1;
+  }
+
+  .footer a:hover {
+    color: #ffcc00;
+    transform: translateX(5px);
+  }
+
+  .like-icon {
+    color: #888;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .like-icon.liked {
+    color: #ff4d4d;
+    transform: scale(1.3);
+  }
+
+  .social-icons a {
+    color: #ffcc00;
+    margin-right: 15px;
+    font-size: 20px;
+    transition: 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: #fff;
+    transform: scale(1.2);
+  }
+
+  .newsletter input {
+    padding: 10px;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .newsletter button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .newsletter button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  .scroll-top {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: #ffcc00;
+    color: #000;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .scroll-top:hover {
+    background: #fff;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #444;
+    margin-top: 40px;
+    padding-top: 20px;
+    text-align: center;
+    color: #999;
+  }
+</style>
+
+<footer class="footer">
+  <div class="scroll-top" onclick="window.scrollTo({top:0, behavior:'smooth'})">Top</div>
+  <div class="footer-container">
+    
+    <!-- B.D.BAJAR Info -->
+    <div>
+      <h3>B.D.BAJAR</h3>
+      <p>Nepal & India's Premier Online Store. Fashion, gadgets & more — all in one place.</p>
+    </div>
+
+
+
+    <!-- Support -->
+    <div>
+      <h3>Support</h3>
+      <ul>
+        <li><a href="Shop contact.html">Help Center</a> <i class="fa-regular fa-heart like-icon"></i></li>
+        <li><a href="My Shop about.html">Shop information</a> <i class="fa-regular fa-heart like-icon"></i></li>
+        <li><a href="returns.html">Returns</a> <i class="fa-regular fa-heart like-icon"></i></li>
+        <li><a href="Job-from.html">job from</a> <i class="fa-regular fa-heart like-icon"></i></li>
+        <li><a href="Shop my profile.html">shop profile</a> <i class="fa-regular fa-heart like-icon"></i></li>
+      </ul>
+    </div>
+
+    <!-- Contact & Newsletter -->
+    <div>
+      <h3>Contact Us</h3>
+      <p>Email: joshibasu1234@gmail.com</p>
+      <p>WhatsApp: +977-9812710161</p>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=61565625534540"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/b.d.joshi1234?igsh=MWlqMGRwc2F3cjJleg=="><i class="fab fa-instagram"></i></a>
+        <a href="https://www.youtube.com/@basujoshi6003"><i class="fab fa-youtube"></i></a>
+      </div>
+      <div class="newsletter">
+        <p style="margin-top: 15px;">Subscribe for updates:</p>
+        <input type="email" placeholder="Enter your email" />
+        <button>Subscribe</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    &shop; 2025 B.D.BAJAR | Built by B.D.bajar | All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // Toggle like
+  document.querySelectorAll('.like-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+      icon.classList.toggle('liked');
+      icon.classList.toggle('fa-regular');
+      icon.classList.toggle('fa-solid');
+    });
+  });
+</script>
