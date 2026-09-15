@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Social Media Sidebar</title> 
+  <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon styling */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border : 100
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Overlay for Sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style> 
+ </head> 
+ <body> <!-- Menu Icon --> 
+  <div class="menu-icon" onclick="toggleMenu()"> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+  </div> <!-- Overlay --> 
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div> <!-- Sidebar Menu --> 
+  <div id="sidebar" class="sidebar"> 
+   <h2 style="padding-left: 32px;">all information</h2> <a></a> 
+   <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="order save.html"> order management</a></li> 
+     <li><a></a><a href="B.D.Bajat returns item admin.html "> *️⃣ order return </a></li>
+     <li><a></a><a href="delivery-status.html"> 🧾 delivery complete status</a></li>
+     
+     
+    </ul> 
+   </nav>
+    </a> 
+  </div> 
+  <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script> 
+ </body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B.D.BAJAR - Return Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+<div class="max-w-7xl mx-auto">
+  <div class="bg-white rounded shadow p-4 mb-4">
+    <h1 class="text-2xl font-bold text-center mb-3">Return / Exchange Admin Panel</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <input id="searchName" class="border p-2 rounded" placeholder="Search Name">
+      <input id="searchPhone" class="border p-2 rounded" placeholder="Search Phone">
+      <input id="searchReturnId" class="border p-2 rounded" placeholder="Search Return ID">
+    </div>
+  </div>
+
+  <div id="returnList" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "order-save-66986.firebaseapp.com",
+  databaseURL: "https://order-save-66986-default-rtdb.firebaseio.com",
+  projectId: "order-save-66986",
+  storageBucket: "order-save-66986.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+let allReturns = {};
+
+function mapsLink(address) {
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address || "");
+}
+
+async function restoreStockFromOrderId(orderId) {
+  const snap = await db.ref("orders").once("value");
+  const orders = snap.val() || {};
+  let target = null;
+
+  for (const [id, order] of Object.entries(orders)) {
+    if (id === orderId) { target = order; break; }
+  }
+
+  if (!target || !Array.isArray(target.items)) return;
+
+  for (const item of target.items) {
+    await db.ref("stock/" + item.id).transaction(current => {
+      current = current || 0;
+      return current + (parseInt(item.qty, 10) || 0);
+    });
+  }
+}
+
+function renderReturns() {
+  const box = document.getElementById("returnList");
+  box.innerHTML = "";
+
+  const nameQ = document.getElementById("searchName").value.toLowerCase().trim();
+  const phoneQ = document.getElementById("searchPhone").value.toLowerCase().trim();
+  const ridQ = document.getElementById("searchReturnId").value.toLowerCase().trim();
+
+  Object.entries(allReturns).reverse().forEach(([rid, r]) => {
+    const text = `${r.name || ""} ${r.phone || ""} ${r.orderId || ""} ${rid || ""}`.toLowerCase();
+    if (nameQ && !(r.name || "").toLowerCase().includes(nameQ)) return;
+    if (phoneQ && !(r.phone || "").toLowerCase().includes(phoneQ)) return;
+    if (ridQ && !(rid || "").toLowerCase().includes(ridQ)) return;
+    if (!(nameQ || phoneQ || ridQ) && !text) return;
+
+    const div = document.createElement("div");
+    div.className = "bg-white rounded shadow p-4 border";
+    div.innerHTML = `
+      <div class="flex justify-between items-start gap-3">
+        <div>
+          <div class="font-bold text-lg">${r.name || ""}</div>
+          <div class="text-sm text-gray-600">Return ID: ${rid}</div>
+          <div class="text-sm text-gray-600">Order ID: ${r.orderId || ""}</div>
+          <div class="text-sm text-gray-600">Phone: ${r.phone || ""}</div>
+          <div class="text-sm text-gray-600">Email: ${r.email || ""}</div>
+          <div class="text-sm text-gray-600">Type: ${r.type || "Return"}</div>
+          <div class="text-sm text-gray-600">Reason: ${r.reason || ""}</div>
+          <div class="text-sm text-gray-600">Status: <b>${r.status || "Pending"}</b></div>
+          <a href="${mapsLink(r.address || "")}" target="_blank" class="text-blue-600 underline text-sm">Open Location</a>
+          <div class="text-sm mt-2">${r.details || ""}</div>
+        </div>
+        <div class="text-right space-y-2">
+          <button onclick="setPending('${rid}')" class="bg-yellow-500 text-white px-3 py-1 rounded w-full">Pending</button>
+          <button onclick="acceptReturn('${rid}')" class="bg-green-600 text-white px-3 py-1 rounded w-full">Accept</button>
+          <button onclick="cancelReturn('${rid}')" class="bg-red-600 text-white px-3 py-1 rounded w-full">Cancel</button>
+        </div>
+      </div>
+    `;
+    box.appendChild(div);
+  });
+}
+
+async function setPending(rid) {
+  await db.ref("returns/" + rid).update({ status: "Pending" });
+}
+
+async function acceptReturn(rid) {
+  const snap = await db.ref("returns/" + rid).once("value");
+  const r = snap.val();
+  if (!r) return alert("Return not found");
+
+  await db.ref("returns/" + rid).update({ status: "Accepted" });
+  await db.ref("orders/" + r.orderId).update({ orderStatus: "Returned", paymentStatus: "Returned" });
+  await restoreStockFromOrderId(r.orderId);
+  alert("Return accepted and stock restored");
+}
+
+async function cancelReturn(rid) {
+  await db.ref("returns/" + rid).update({ status: "Cancelled" });
+}
+
+db.ref("returns").on("value", snap => {
+  allReturns = snap.val() || {};
+  renderReturns();
+});
+
+document.getElementById("searchName").addEventListener("input", renderReturns);
+document.getElementById("searchPhone").addEventListener("input", renderReturns);
+document.getElementById("searchReturnId").addEventListener("input", renderReturns);
+</script>
+</body>
+</html>
