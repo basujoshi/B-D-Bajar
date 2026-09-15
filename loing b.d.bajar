@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.D.Bajar Login</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#fff;
+padding:25px;
+border-radius:50px;
+width:340px;
+text-align:center;
+box-shadow:0 0 20px rgba(0,0,0,.3);
+}
+
+#logo{
+width:160px;
+height:160px;
+border-radius:100%;
+object-fit:cover;
+margin:auto;
+display:block;
+border:3px solid #2563eb;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+margin-top:10px;
+}
+
+.google{
+background:#db4437;
+color:#fff;
+}
+
+
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<img id="logo" src="logo1.jpg">
+
+<h2>B.D.Bajar Login</h2>
+ 
+
+<button class="google" onclick="googleLogin()">
+Login With Google
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyBZtoHvLhv7unvgbzd_gHppsFH7H3za8gQ",
+authDomain: "order-tracking-d18f5.firebaseapp.com",
+projectId: "order-tracking-d18f5",
+storageBucket: "order-tracking-d18f5.firebasestorage.app",
+messagingSenderId: "165667356277",
+appId: "1:165667356277:web:a912f44aa91fe4479d423c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.googleLogin = async function(){
+
+try{
+
+const provider = new GoogleAuthProvider();
+
+const result = await signInWithPopup(auth,provider);
+
+if(result.user){
+
+alert("Login Success");
+
+window.location.href="My shop orginal page.html";
+
+}
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+window.location.href="My shop orginal page.html";
+
+}
+
+});
+
+// Auto Logo Change
+const logos = [
+
+"https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp.jpg",
+"https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp .jpg",
+"https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp.jpg",
+"https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg.jpg",
+"https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp.jpg",
+"https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp.jpg",
+"https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp .jpg",
+"https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp.jpg",
+"https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.web.jpg",
+"https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp.jpg"
+];
+
+let current = 0;
+
+setInterval(()=>{
+
+current++;
+
+if(current >= logos.length){
+current = 0;
+}
+
+document.getElementById("logo").src = logos[current];
+
+},3000);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.D.Bajar today share market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 80%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 80%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border: 1px solid white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <h2 style="padding-left: 20px;"> B.D.Joshi online shopping </h2>
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+          <li><a href="my shop.html"> back to B.D.Bajar </a></li>
+          
+        </ul>
+    </nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "250px";
+            overlay.style.display = "block";
+        }
+    }
+
+    function closeMenu() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #greeting {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="greeting">Loading...</div>
+
+  <script>
+    const greetingElement = document.getElementById("greeting");
+    const now = new Date();
+    const hour = now.getHours();
+
+    let greeting = "";
+
+    if (hour >= 5 && hour < 12) {
+      greeting = "Good morning🌄";
+    } else if (hour >= 12 && hour < 17) {
+      greeting = "Good Afternoon🍛";
+    } else if (hour >= 17 && hour < 20) {
+      greeting = "Good Evening🚶";
+    } else {
+      greeting = "Good Night🛌";
+    }
+
+    greetingElement.innerText = greeting;
+  </script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Photo Auto-Changing Slideshow</title>
+    <style>
+        /* Slideshow Container Styling */
+        .slideshow-container {
+            max-width: 20 px;
+            position: relative;
+            margin: 10;
+        }
+
+        /* Slide Images Styling */
+        .slide {
+            display: none;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        /* Fade Animation */
+        .fade {
+            animation: fadeEffect 1s;
+        }
+
+        /* Keyframes for Fade Effect */
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+       <!-- Slides (11 images) -->
+       <img src="https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp" class="slide fade " alt="Image">
+        <img src="https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp " class="slide fade" alt="Image 1">
+        <img src="https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp" class="slide fade" alt="Image 2">
+        <img src="https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg " class="slide fade" alt="Image 3">
+        <img src="https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp" class="slide fade" alt="Image 4">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 5">
+        <img src="https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp " class="slide fade" alt="Image 6">
+        <img src="https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp" class="slide fade" alt="Image 7">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 8">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 9">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 10">
+    </div>
+
+    <!-- JavaScript for Auto-Changing Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+
+            // Show current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Change image every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Initialize slideshow
+        showSlides();
+    </script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.D.BAJAR Share Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .ticker {
+            background: black;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+        .ticker span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: tickerMove 10s linear infinite;
+        }
+        @keyframes tickerMove {
+            from { transform: translateX(0%); }
+            to { transform: translateX(-100%); }
+        }
+        .container {
+            max-width: 500px;
+            margin: 70px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 { color: #333; }
+        .price {
+            font-size: 35px;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .up { color: green; transform: scale(1.1); }
+        .down { color: red; transform: scale(0.9); }
+        .details { font-size: 18px; margin-top: 10px; }
+        .bullish { color: green; font-weight: bold; }
+        .bearish { color: red; font-weight: bold; }
+        .shareholders {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 16px;
+        }
+        .shareholders table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .shareholders th, .shareholders td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .shareholders th { background-color: #333; color: white; }
+    </style>
+</head>
+<body>
+
+    <!-- Live Ticker -->
+    <div class="ticker">
+        <span id="tickerText">B.D.BAJAR LIVE STOCK PRICE: NPR 100 | TREND: 📈 BULLISH | HIGH: 120 | LOW: 80</span>
+    </div>
+
+    <!-- Main Share Market Box -->
+    <div class="container">
+        <h2>📈 B.D.BAJAR Share Market</h2>
+        <p>Current Share Price: <span class="price" id="sharePrice">100</span> NPR</p>
+        <p class="details">🔼 High: <span id="highPrice">120</span> | 🔽 Low: <span id="lowPrice">80</span></p>
+        <p class="details">📊 Trading Volume: <span id="volume">5000</span></p>
+        <p class="details">📉 Market Trend: <span id="trend" class="bullish">BULLISH</span></p>
+        <p class="details">💰 Total Market Capitalization: NPR <span id="marketCap">500000</span></p>
+        
+        <!-- Shareholders Table -->
+        <div class="shareholders">
+            <h3>📜 Shareholder Details</h3>
+            <table>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>shares pened </th>
+                    <th>share value (NRP)</th>
+                </tr>
+                <tr>
+                    <td> <!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .popup img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .work {
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Small Profile Icon -->
+<img src="https://i.ibb.co/6cCgTNS6/1746813369117.jpg" class="profile-icon" onclick="togglePopup()">
+
+<!-- Popup Content -->
+<div class="popup" id="popup">
+  <img scr="https://i.ibb.co/6cCgTNS6/1746813369117.jpg">
+  <div class="name">B.D.,joshi</div>
+  <div class="work"> CO-B.D.Bajar</div>
+</div>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html>  </td>
+                    <td><nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="share4.html.html"> 🧑‍💼 B.D.Joshi </a></li> 
+    </ul> 
+   </nav>  </td>
+                    <td id="shares-bd">1000</td>
+                    <td id="value-bd">100000</td>
+                </tr>
+                <tr>
+                    <td><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .popup img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .work {
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Small Profile Icon -->
+<img src="https://i.ibb.co/PGJGfrLg/1746813346214.jpg" class="profile-icon" onclick="togglePopup()">
+
+<!-- Popup Content -->
+<div class="popup" id="popup">
+  <img src="https://i.ibb.co/PGJGfrLg/1746813346214.jpg">
+  <div class="name"> suresh joshi</div>
+  <div class="work"> Co-founder B.D.Bajar</div>
+</div>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html></td>
+                    <td> <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="share3.html.html"> 🧑‍💼  suresh joshi</a></li> 
+    </ul> 
+   </nav> </td>
+                    <td id="shares-suresh">800</td>
+                    <td id="value-suresh">80000</td>
+                </tr>
+                <tr>
+                  <td><!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .popup img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .work {
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Small Profile Icon -->
+<img src="https://i.ibb.co/fGGcCbk0/1746813280405.jpg" class="profile-icon" onclick="togglePopup()">
+
+<!-- Popup Content -->
+<div class="popup" id="popup">
+  <img src="https://i.ibb.co/fGGcCbk0/1746813280405.jpg  ">
+  <div class="name">yogesh bhatt</div>
+  <div class="work">maneger</div>
+</div>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html></td>
+                    <td><nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="share1.html.html"> 🧑‍💼  yogesh bhatt</a></li> 
+    </ul> 
+   </nav>  </td>
+                    <td id="shares-yogesh">600</td>
+                    <td id="value-yogesh">60000</td>
+                </tr>
+                <tr>
+                    <td> <!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .profile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .popup img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .work {
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Small Profile Icon -->
+<img src="https://i.ibb.co/ZR7z8XqK/1746813308865.jpg" class="profile-icon" onclick="togglePopup()">
+
+<!-- Popup Content -->
+<div class="popup" id="popup">
+  <img src="https://i.ibb.co/ZR7z8XqK/1746813308865.jpg ">
+  <div class="name">Bipin bam</div>
+  <div class="work">share holder</div>
+</div>
+
+<script>
+  function togglePopup() {
+    var popup = document.getElementById("popup");
+    popup.style.display = popup.style.display === "block" ? "none" : "block";
+  }
+</script>
+
+</body>
+</html></td>
+                    <td><nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="share2.html.html"> 🧑‍💼  Bipin bam</a></li> 
+    </ul> 
+   </nav>  </td>
+                    <td id="shares-bipin">500</td>
+                    <td id="value-bipin">50000</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let currentPrice = 100;
+        let highPrice = 120;
+        let lowPrice = 80;
+        let trendElement = document.getElementById("trend");
+        let tickerText = document.getElementById("tickerText");
+
+        // Shareholders Data
+        let shareholders = {
+            "bd": 1000,
+            "suresh": 800,
+            "yogesh": 600,
+            "bipin": 500
+        };
+
+        function updatePrice() {
+            let priceElement = document.getElementById("sharePrice");
+            let volumeElement = document.getElementById("volume");
+            let marketCapElement = document.getElementById("marketCap");
+
+            // Generate price change (-5 to +5)
+            let change = Math.floor(Math.random() * 11) - 5;
+            currentPrice += change;
+
+            if (currentPrice < 50) currentPrice = 50;
+            if (currentPrice > highPrice) highPrice = currentPrice;
+            if (currentPrice < lowPrice) lowPrice = currentPrice;
+
+            // Update UI
+            priceElement.textContent = currentPrice;
+            document.getElementById("highPrice").textContent = highPrice;
+            document.getElementById("lowPrice").textContent = lowPrice;
+
+            // Random Trading Volume
+            let volume = Math.floor(Math.random() * (10000 - 1000) + 1000);
+            volumeElement.textContent = volume;
+
+            // Market Trend
+            if (change > 0) {
+                priceElement.classList.add("up");
+                priceElement.classList.remove("down");
+                trendElement.textContent = "BULLISH";
+                trendElement.className = "bullish";
+            } else {
+                priceElement.classList.add("down");
+                priceElement.classList.remove("up");
+                trendElement.textContent = "BEARISH";
+                trendElement.className = "bearish";
+            }
+
+            // Update Shareholder Values
+            let totalShares = 0;
+            for (let key in shareholders) {
+                let shareValue = shareholders[key] * currentPrice;
+                document.getElementById(`value-${key}`).textContent = shareValue;
+                totalShares += shareholders[key];
+            }
+
+            // Update Market Capitalization
+            marketCapElement.textContent = totalShares * currentPrice;
+
+            // Update ticker text
+            tickerText.textContent = `B.D.BAJAR LIVE STOCK PRICE: NPR ${currentPrice} | TREND: ${trendElement.textContent} | HIGH: ${highPrice} | LOW: ${lowPrice}`;
+
+            // Reset animation effect
+            setTimeout(() => {
+                priceElement.classList.remove("up", "down");
+            }, 500);
+        }
+
+        setInterval(updatePrice, 1000);
+    </script>
+
+</body>
+</html>
+
+

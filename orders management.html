@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 300px; margin: auto; padding: 10px; border: 2px solid #000; background: #f8f8f8; }
+        input, select, button { width: 90%; padding: 8px; margin: 5px 0; }
+        button { background: green; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Order Management</h2>
+    <div id="orderForm" class="container">
+        <h3>Create Order</h3>
+        <input type="text" id="orderId" placeholder="Order ID" value="BD01">
+        <input type="text" id="trackingCode" placeholder="Tracking Code" readonly>
+        <input type="text" id="customerName" placeholder="Customer Name">
+        <input type="text" id="contact" placeholder="Contact Number">
+        <input type="text" id="item" placeholder="Item">
+        <select id="payment">
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="Online Payment">Online Payment</option>
+        </select>
+        <button onclick="generateTrackingCode()">Generate Tracking Code</button>
+        <button onclick="saveOrder()">Save Order</button>
+        <button onclick="window.location.href='tracking.html'">Go to Tracking</button>
+    </div>
+
+    <script>
+        function generateTrackingCode() {
+            let trackingCode = "TRK" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById("trackingCode").value = trackingCode;
+        }
+
+        function saveOrder() {
+            let orderData = {
+                orderId: document.getElementById("orderId").value,
+                trackingCode: document.getElementById("trackingCode").value,
+                customerName: document.getElementById("customerName").value,
+                contact: document.getElementById("contact").value,
+                item: document.getElementById("item").value,
+                payment: document.getElementById("payment").value
+            };
+
+            if (!orderData.trackingCode) {
+                alert("Please generate a tracking code first!");
+                return;
+            }
+
+            localStorage.setItem(orderData.trackingCode, JSON.stringify(orderData));
+            alert("Order Saved! Tracking Code: " + orderData.trackingCode);
+        }
+    </script>
+</body>
+</html>

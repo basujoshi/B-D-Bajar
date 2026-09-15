@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.D.Bajar feedback</title>
+    <style>
+        /* Slideshow Container Styling */
+        .slideshow-container {
+            max-width: 20 px;
+            position: relative;
+            margin: 10;
+        }
+
+        /* Slide Images Styling */
+        .slide {
+            display: none;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        /* Fade Animation */
+        .fade {
+            animation: fadeEffect 1s;
+        }
+
+        /* Keyframes for Fade Effect */
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+       <!-- Slides (11 images) -->
+       <img src="https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp" class="slide fade " alt="Image">
+        <img src="https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp " class="slide fade" alt="Image 1">
+        <img src="https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp" class="slide fade" alt="Image 2">
+        <img src="https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg " class="slide fade" alt="Image 3">
+        <img src="https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp" class="slide fade" alt="Image 4">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 5">
+        <img src="https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp " class="slide fade" alt="Image 6">
+        <img src="https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp" class="slide fade" alt="Image 7">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 8">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 9">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 10">
+    </div>
+
+    <!-- JavaScript for Auto-Changing Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+
+            // Show current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Change image every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Initialize slideshow
+        showSlides();
+    </script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 80%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 80%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border: 1px solid white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <h2 style="padding-left: 20px;"> B.D.Joshi online shopping </h2>
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+         <li><a href="my shop.html"> back to B.D.Bajar </a></li>
+>
+        </ul>
+    </nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "250px";
+            overlay.style.display = "block";
+        }
+    }
+
+    function closeMenu() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Like & Comment System</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    button {
+      padding: 8px 15px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    .comment {
+      border-bottom: 1px solid #ddd;
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔥 feedback System</h2>
+
+  <button id="likeBtn">👍 Like (<span id="likeCount">0</span>)</button>
+
+  <h3>Leave a feedback:</h3>
+  <input type="text" id="name" placeholder="Your Name" />
+  <textarea id="comment" placeholder="Your Comment"></textarea>
+  <button onclick="submitComment()">Submit</button>
+
+  <h3>All feedback:</h3>
+  <div id="comments"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCH1mDQz8N5K5wBPHRMhBREVIp6jp6n65Q",
+      authDomain: "feedback-a6eb8.firebaseapp.com",
+      databaseURL: "https://feedback-a6eb8-default-rtdb.firebaseio.com/",
+      projectId: "feedback-a6eb8",
+      storageBucket: "feedback-a6eb8.appspot.com",
+      messagingSenderId: "260898583193",
+      appId: "1:260898583193:web:3a9964310d8a1023993e08",
+      measurementId: "G-W3Z13P1N4Q"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Like System
+    const likeBtn = document.getElementById("likeBtn");
+    const likeCountEl = document.getElementById("likeCount");
+
+    function updateLikeCount() {
+      db.ref("likes/count").on("value", snapshot => {
+        const count = snapshot.val() || 0;
+        likeCountEl.textContent = count;
+      });
+    }
+
+    likeBtn.addEventListener("click", () => {
+      if (localStorage.getItem("liked")) {
+        alert("You already liked.");
+        return;
+      }
+
+      const likeRef = db.ref("likes/count");
+      likeRef.transaction(current => (current || 0) + 1);
+      localStorage.setItem("liked", true);
+    });
+
+    updateLikeCount();
+
+    // Comment System
+    function submitComment() {
+      const name = document.getElementById("name").value.trim();
+      const comment = document.getElementById("comment").value.trim();
+
+      if (!name || !comment) {
+        alert("Please enter both name and comment.");
+        return;
+      }
+
+      const commentData = {
+        name,
+        comment,
+        time: new Date().toLocaleString()
+      };
+
+      db.ref("comments").push(commentData, err => {
+        if (!err) {
+          document.getElementById("name").value = "";
+          document.getElementById("comment").value = "";
+        }
+      });
+    }
+
+    function loadComments() {
+      const commentsDiv = document.getElementById("comments");
+      db.ref("comments").on("value", snapshot => {
+        commentsDiv.innerHTML = "";
+        snapshot.forEach(child => {
+          const data = child.val();
+          const div = document.createElement("div");
+          div.className = "comment";
+          div.innerHTML = `<b>${data.name}</b> <small>(${data.time})</small><br>${data.comment}`;
+          commentsDiv.prepend(div);
+        });
+      });
+    }
+
+    loadComments();
+  </script>
+</body>
+</html>

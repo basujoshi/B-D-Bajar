@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.D.BAJAR - Customer Status</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; text-align:center; }
+  h2 { color: #333; }
+  input, button { padding: 10px; margin: 5px 0; width: 100%; max-width: 300px; }
+  button { background: #007bff; color: #fff; border: none; cursor: pointer; }
+  button:hover { background: #0056b3; }
+  table { width: 100%; max-width: 700px; margin: 20px auto; border-collapse: collapse; background: #fff; }
+  th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+  th { background: #007bff; color: #fff; }
+  .status-pending { color: orange; font-weight: bold; }
+  .status-success { color: green; font-weight: bold; }
+  .status-exchange { color: purple; font-weight: bold; }
+  .status-cancel { color: red; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>📦 Check Your Return/Exchange Status</h2>
+<input type="text" id="mobileInput" placeholder="Enter your mobile number">
+<button onclick="checkStatus()">Check Status</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Order ID</th>
+      <th>Reason</th>
+      <th>Type</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody id="statusTable">
+    <tr><td colspan="4">Enter your number and click "Check Status"</td></tr>
+  </tbody>
+</table>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+// Firebase config
+const firebaseConfig = {
+  databaseURL: "https://king-59c08-default-rtdb.firebaseio.com"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const returnsRef = ref(db, "returns");
+
+const tableBody = document.getElementById("statusTable");
+
+window.checkStatus = function() {
+  const mobile = document.getElementById("mobileInput").value.trim();
+  tableBody.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
+
+  if (!mobile) {
+    alert("Please enter your mobile number");
+    tableBody.innerHTML = "<tr><td colspan='4'>Enter your number and click Check Status</td></tr>";
+    return;
+  }
+
+  get(returnsRef).then(snapshot => {
+    const data = snapshot.val();
+    let found = false;
+    tableBody.innerHTML = "";
+
+    if (!data) {
+      tableBody.innerHTML = "<tr><td colspan='4'>No requests found</td></tr>";
+      return;
+    }
+
+    for (let key in data) {
+      const phone = data[key].phone ? data[key].phone.toString().trim() : "";
+      if (phone === mobile) {
+        found = true;
+        const statusClass =
+          data[key].status.toLowerCase().includes("success") ? "status-success" :
+          data[key].status.toLowerCase().includes("pending") ? "status-pending" :
+          data[key].status.toLowerCase().includes("exchange") ? "status-exchange" :
+          "status-cancel";
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${data[key].orderId}</td>
+          <td>${data[key].reason}</td>
+          <td>${data[key].type || 'Return'}</td>
+          <td class="${statusClass}">${data[key].status}</td>
+        `;
+        tableBody.appendChild(row);
+      }
+    }
+
+    if (!found) {
+      tableBody.innerHTML = "<tr><td colspan='4'>No request found for this number</td></tr>";
+    }
+  }).catch(err => {
+    alert("Error fetching data: " + err);
+    tableBody.innerHTML = "<tr><td colspan='4'>Error fetching data</td></tr>";
+  });
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Sidebar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 80%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 80%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border: 1px solid white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <h2 style="padding-left: 20px;"> B.D.Joshi online shopping </h2>
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+         <li><a href="my shop.html"> back to B.D.Bajar </a></li>
+          
+        </ul>
+    </nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "250px";
+            overlay.style.display = "block";
+        }
+    }
+
+    function closeMenu() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    #greeting {
+      font-size: 32px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="greeting">Loading...</div>
+
+  <script>
+    const greetingElement = document.getElementById("greeting");
+    const now = new Date();
+    const hour = now.getHours();
+
+    let greeting = "";
+
+    if (hour >= 5 && hour < 12) {
+      greeting = "Good morning🌄";
+    } else if (hour >= 12 && hour < 17) {
+      greeting = "Good Afternoon🍛";
+    } else if (hour >= 17 && hour < 20) {
+      greeting = "Good Evening🚶";
+    } else {
+      greeting = "Good Night🛌";
+    }
+
+    greetingElement.innerText = greeting;
+  </script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Photo Auto-Changing Slideshow</title>
+    <style>
+        /* Slideshow Container Styling */
+        .slideshow-container {
+            max-width: 20 px;
+            position: relative;
+            margin: 10;
+        }
+
+        /* Slide Images Styling */
+        .slide {
+            display: none;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        /* Fade Animation */
+        .fade {
+            animation: fadeEffect 1s;
+        }
+
+        /* Keyframes for Fade Effect */
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+       <!-- Slides (11 images) -->
+       <img src="https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp" class="slide fade " alt="Image">
+        <img src="https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp " class="slide fade" alt="Image 1">
+        <img src="https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp" class="slide fade" alt="Image 2">
+        <img src="https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg " class="slide fade" alt="Image 3">
+        <img src="https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp" class="slide fade" alt="Image 4">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 5">
+        <img src="https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp " class="slide fade" alt="Image 6">
+        <img src="https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp" class="slide fade" alt="Image 7">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 8">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 9">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 10">
+    </div>
+
+    <!-- JavaScript for Auto-Changing Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+
+            // Show current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Change image every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Initialize slideshow
+        showSlides();
+    </script>
+
+</body>
+</html>
+
+
+    
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Return Request - B.D.BAJAR</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    form { width: 90%; max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background: #f9f9f9; }
+    label, input, select, textarea { display: block; width: 100%; margin: 10px 0; padding: 8px; }
+    button { background: #28a745; color: white; padding: 10px; border: none; cursor: pointer; }
+    button:hover { background: #218838; }
+  </style>
+</head>
+<body>
+
+  <h2>Return Request</h2>
+
+  <form id="returnForm">
+    <label>Enter Order ID & Product:</label>
+    <input type="text" id="orderId" required />
+
+    <label>Reason for Return:</label>
+    <select id="reason" required>
+      <option value="">Select Reason</option>
+      <option value="Size Issue">Size Issue</option>
+      <option value="Damaged Product">Damaged Product</option>
+      <option value="Wrong Product">Wrong Product</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Additional Details:</label>
+    <textarea id="details" rows="3"></textarea>
+
+    <label>Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <label>Phone Number:</label>
+    <input type="tel" id="phone" required>
+
+    <label>Full Address:</label>
+    <textarea id="address" rows="2" required></textarea>
+
+    <label>Location (Auto-Fetch):</label>
+    <input type="text" id="location" placeholder="Fetching location..." readonly>
+
+    <button type="submit">Submit Return Request</button>
+  </form>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+    // Firebase config updated
+    const firebaseConfig = {
+      databaseURL: "https://king-59c08-default-rtdb.firebaseio.com"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Auto-fetch location
+    function fetchLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          document.getElementById("location").value = `https://www.google.com/maps?q=${lat},${lon}`;
+        }, () => {
+          document.getElementById("location").value = "Location access denied!";
+        });
+      }
+    }
+    fetchLocation();
+
+    // Submit form
+    document.getElementById("returnForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const data = {
+        orderId: document.getElementById("orderId").value,
+        reason: document.getElementById("reason").value,
+        details: document.getElementById("details").value,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        location: document.getElementById("location").value,
+        status: "Pending"
+      };
+
+      const newRef = push(ref(db, "returns"));
+      set(newRef, data).then(() => {
+        alert("✅ Return request submitted successfully!");
+        document.getElementById("returnForm").reset();
+      });
+    });
+  </script>
+</body>
+</html>

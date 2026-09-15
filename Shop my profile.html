@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Mini Chat</title>
+    <style>
+        #whatsapp-btn, #chat-box {
+            position: fixed;
+            right: 20px;
+        }
+        #whatsapp-btn {
+            bottom: 20px;
+            background: #25d366;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+        }
+        #whatsapp-btn img { width: 30px; margin-top: 10px; }
+        #chat-box {
+            bottom: 80px;
+            width: 280px;
+            background: #fff;
+            border: 1px solid #ddd;
+            display: none;
+            padding: 10px;
+        }
+        #chat-header { background: #25d366; color: #fff; padding: 5px; }
+        #chat-footer { display: flex; }
+        input { flex: 1; padding: 5px; }
+        button { background: #25d366; color: #fff; border: none; padding: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="whatsapp-btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </div>
+
+    <div id="chat-box">
+        <div id="chat-header"> B.D.Bajar costumer care Chat <span id="close-btn" style="float:right;cursor:pointer;">X</span></div>
+        <div id="chat-messages">Namaste!  wellcome to B.D.Bajar costumer care thanks for visit sir/madam?</div>
+        <div id="chat-footer">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("whatsapp-btn").onclick = function() {
+            document.getElementById("chat-box").style.display = "block";
+        };
+        document.getElementById("close-btn").onclick = function() {
+            document.getElementById("chat-box").style.display = "none";
+        };
+        document.getElementById("send-btn").onclick = function() {
+            var message = document.getElementById("user-input").value;
+            if (message.trim() !== "") {
+                window.open("https://wa.me/+918925388970?text=" + encodeURIComponent(message), "_blank");
+            }
+        };
+    </script>
+
+</body>
+</html>
+
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Social Media Sidebar</title> 
+  <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon styling */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 100%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border : 100
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: flex;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .sidebar a img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Overlay for Sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style> 
+ </head> 
+ <body> <!-- Menu Icon --> 
+  <div class="menu-icon" onclick="toggleMenu()"> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+   <div class="bar"></div> 
+  </div> <!-- Overlay --> 
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div> <!-- Sidebar Menu --> 
+  <div id="sidebar" class="sidebar"> 
+   <h2 style="padding-left: 32px;">all information</h2> <a></a> 
+   <nav> <a> </a> 
+    <ul> <a> </a> 
+     <li><a></a><a href="my shop.html.html"> ↩️  back to B.D.Bajar</a></li> 
+    </ul> 
+   </nav>
+    </a> 
+  </div> 
+  <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("sidebar");
+            const overlay = document.getElementById("overlay");
+
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "0";
+                overlay.style.display = "none";
+            } else {
+                sidebar.style.width = "250px";
+                overlay.style.display = "block";
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById("sidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script> 
+ </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .profile-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #0077b5;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #0077b5;
+            font-size: 32px;
+        }
+        .details {
+            margin: 20px 0;
+        }
+        .details p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .social-media {
+            margin-top: 20px;
+        }
+        .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .social-media a.facebook {
+            background-color: #3b5998;
+        }
+        .social-media a.twitter {
+            background-color: #1da1f2;
+        }
+        .social-media a.instagram {
+            background-color: #e4405f;
+        }
+        .social-media a.linkedin {
+            background-color: #0077b5;
+        }
+        .social-media a:hover {
+            opacity: 0.8;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- Profile Photo -->
+        <img src=" href="https://ibb.co/KsgCfTf"><img src="https://i.ibb.co/sdGmJ2nQ/file-00000000165461f6a353a803df04ce0a-conversation-id-67ff6f15-afdc-800e-973e-8e00dd4617c0-message-i.png" alt="Profile Photo" class="profile-photo">
+
+        <!-- Name and Title -->
+        <h1><nav>
+        <ul style="list-style-type: none; padding: 0;">
+          <li><a href="thank-you.html">B.D.Bajar</a></li> </h1>
+        <p><strong>advance trakking| fasting delivery| Cash on delivery</strong></p>
+
+        <!-- Details Section -->
+        <div class="details">
+            <p><strong>Address:</strong> ( Suda-7, Gauji, Kanchanpur, Nepal all nepal delivery)to( all india delivery) </p>
+            <p><strong>Email:</strong> ( joshibasu1234@gmail.com ) </p>
+                 <p><strong>content nepal:</strong> ( 9812710161 ) </p>
+                      <p><strong>contact india:</strong> ( 9514499562 ) </p>
+            
+            
+            <p><strong>sarvice:</strong>( all  Nepal ) in ( all india)</p>
+               <p><strong>brand:</strong> ( pepe Jens, Life, Indian train, stop, park Avenue London fog, parx,gb, sport fit, in face , all brands item) </p>
+     <p><strong>seles man language:</strong> ( nepali, english, hindi, tamil ) </p>
+            
+     <p><strong>company:</strong>(  B.D.Bajar ) </p>
+     <p><strong>work:</strong> ( sells Man  ) </p>
+            
+            
+            <p><strong>future:</strong> ( online payment, credit and debit card 💳, cash on delivery)</p>
+    

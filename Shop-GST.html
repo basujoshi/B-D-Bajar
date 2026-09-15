@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.D.Bajar details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu icon */
+        .menu-icon {
+            width: 40px;
+            cursor: pointer;
+            margin: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+        }
+
+        .bar {
+            width: 80%;
+            height: 4px;
+            background-color: black;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 80%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+            z-index: 1000;
+            border: 1px solid white;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Menu Icon -->
+<div class="menu-icon" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<!-- Overlay -->
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <h2 style="padding-left: 20px;"> B.D.Joshi online shopping </h2>
+    <nav>
+        <ul style="list-style-type: none; padding: 0;">
+         <li><a href="my shop.html"> back to B.D.Bajar </a></li>
+
+        </ul>
+    </nav>
+</div>
+
+<script>
+    function toggleMenu() {
+        var sidebar = document.getElementById("sidebar");
+        var overlay = document.getElementById("overlay");
+
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0";
+            overlay.style.display = "none";
+        } else {
+            sidebar.style.width = "250px";
+            overlay.style.display = "block";
+        }
+    }
+
+    function closeMenu() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("overlay").style.display = "none";
+    }
+</script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Photo Auto-Changing Slideshow</title>
+    <style>
+        /* Slideshow Container Styling */
+        .slideshow-container {
+            max-width: 20 px;
+            position: relative;
+            margin: 10;
+        }
+
+        /* Slide Images Styling */
+        .slide {
+            display: none;
+            width: 50%;
+            border-radius: 8px;
+        }
+
+        /* Fade Animation */
+        .fade {
+            animation: fadeEffect 1s;
+        }
+
+        /* Keyframes for Fade Effect */
+        @keyframes fadeEffect {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+       <!-- Slides (11 images) -->
+       <img src="https://i.ibb.co/PGF2tGtr/file-N79-HQYba-E3-Gxzm-Bn4i-BE63.webp" class="slide fade " alt="Image">
+        <img src="https://i.ibb.co/CstYN5Gy/file-1-YFq-BUTSx-ARwf-Asuy-H4p-VN.webp " class="slide fade" alt="Image 1">
+        <img src="https://i.ibb.co/HfRM1r3v/file-Li4-WWdbune-Bh2-Lx-Mh-Cks-Wq.webp" class="slide fade" alt="Image 2">
+        <img src="https://i.ibb.co/GbzZ5bY/file-Xbimi-Hu-Gd4-Dg-Dn6oiftod-T.jpg " class="slide fade" alt="Image 3">
+        <img src="https://i.ibb.co/sd42xXPL/file-PW2-YEY5-CXgb-Xg2gq-Mmp-Qk-V.webp" class="slide fade" alt="Image 4">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 5">
+        <img src="https://i.ibb.co/CKnct4n3/file-1b2-MKz-N27-X2mmess-PK31d6.webp " class="slide fade" alt="Image 6">
+        <img src="https://i.ibb.co/KQ6MNsf/file-DGUK7-Fc5-EAHSxu-JUA8mn-MX.webp" class="slide fade" alt="Image 7">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 8">
+        <img src="https://i.ibb.co/fzpnNnbK/file-XDoh-W57g-HHD9u-HT7m-Ccyo9.webp" class="slide fade" alt="Image 9">
+        <img src="https://i.ibb.co/hFQqZp7z/file-WGDXw-Rw-Kgwrtz6zu-Ku9n-Gu.webp" class="slide fade" alt="Image 10">
+    </div>
+
+    <!-- JavaScript for Auto-Changing Slideshow -->
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+
+            // Hide all slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            // Increment slide index
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+
+            // Show current slide
+            slides[slideIndex - 1].style.display = "block";
+
+            // Change image every 3 seconds
+            setTimeout(showSlides, 3000);
+        }
+
+        // Initialize slideshow
+        showSlides();
+    </script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>B.D.Bajar - Company Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .company-info {
+      max-width: 600px;
+      background: white;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .company-info h2 {
+      text-align: center;
+      color: #28a745;
+    }
+
+    .info-item {
+      margin-bottom: 12px;
+    }
+
+    .info-label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .info-value {
+      margin-left: 10px;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+
+<div class="company-info">
+  <h2>🛍️ B.D.Bajar Company Details</h2>
+
+  <div class="info-item">
+    <span class="info-label">Company Name:</span>
+    <span class="info-value">B.D.Bajar Pvt. Ltd.</span>
+  </div>
+
+  <div class="info-item">
+    <span class="info-label">Address:</span>
+    <span class="info-value">Suda-7, Gauji, Kanchanpur, Nepal</span>
+  </div>
+
+  <div class="info-item">
+    <span class="info-label">GST Number:</span>
+    <span class="info-value">07ABCDE1234F1Z9</span>
+  </div>
+
+  <div class="info-item">
+    <span class="info-label">GST Type:</span>
+    <span class="info-value">Regular</span>
+  </div>
+
+  <div class="info-item">
+    <span class="info-label">Gmail:</span>
+    <span class="info-value">joshibasu1234@gmail.com</span>
+  </div>
+
+  <div class="info-item">
+    <span class="info-label">Contact Number:</span>
+    <span class="info-value">+91 9812710161</span>
+  </div>
+</div>
+
+</body>
+</html>
